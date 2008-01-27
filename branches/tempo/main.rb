@@ -3,7 +3,12 @@ require 'mrel'
 
 HELP =<<END
 Algebraic Relation Calculator
-Try "A={(1,2)}" and "A"
+q:   quit
+Symbols begin with capital letters, and then downcase (A, Test, Myrelation)
+Affection:
+  A={(1,2)}
+Display a symbol value
+  A
 END
 
 class App #< TextPrompt
