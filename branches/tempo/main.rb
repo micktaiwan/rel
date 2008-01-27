@@ -25,10 +25,25 @@ class App #< TextPrompt
         puts HELP
         when ''
       else
-        puts @rel.exec(c)
+        d(@rel.exec(c))
       end # case
     end # while
   end # start
+  
+  def d(arr)
+    result = arr[1] 
+    case arr[0]
+      when 'error'
+      puts "Error: #{result}"
+      when 'symbol'
+      puts 'Symbol not found' and return if result[1] == nil
+      puts result[1].to_s
+      when 'affectation'
+      puts result[1].to_s
+    else
+      puts "Unknown return: #{arr[0]}"
+    end
+  end
   
 end # class App
 

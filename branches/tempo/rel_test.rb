@@ -1,10 +1,13 @@
 require 'test/unit'
 require 'treetop'
+require 'mrel'
 
-class TC_MyTest < Test::Unit::TestCase
+class TC_REL < Test::Unit::TestCase
+  
   def setup
     Treetop.load "rel"
     @parser = RelParser.new
+    @rel = MRel.new
   end
   
   # def teardown
@@ -29,7 +32,8 @@ class TC_MyTest < Test::Unit::TestCase
   end
   
   def test_affect
-    #assert_equal([],@parser.parse('A={};A'))
+    assert_equal(['symbol',['A',nil]],@rel.exec('A'))
+    assert_equal([],@parser.parse('A={};A'))
     #assert_equal([[1,2]],@parser.parse('A={(1,2)}').elements[0].value)
     #assert_equal([[1,2],[2,3]],@parser.parse('A={(1,2),(2,3)}').elements[0].value)
   end
