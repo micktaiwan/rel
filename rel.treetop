@@ -19,7 +19,11 @@ grammar Rel
 	end
 
 	rule symbol
-		[A-Z] [a-z]*
+		[A-Z] [a-z]* {
+			def action
+				'a_symbol'
+			end
+		}
 	end
 	
 	rule set
@@ -59,15 +63,7 @@ grammar Rel
 	end
 
 	rule calcul
-		set / symbol# / inter
-	end
-
-	rule display
-		symbol {
-  			def action
-  				'a_display'
-  			end
-  		}
+		set / symbol #/ inter 
 	end
 
 	#rule inter
