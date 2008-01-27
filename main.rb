@@ -1,5 +1,5 @@
 #require '../MLib/TextPrompt'
-require 'rel'
+require 'mrel'
 
 HELP =<<END
 Algebraic Relation Calculator

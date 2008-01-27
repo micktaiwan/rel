@@ -14,7 +14,7 @@ class TC_MyTest < Test::Unit::TestCase
     assert(@parser.parse('A'))
     assert(!@parser.parse('a'))
     assert(@parser.parse('Abc'))
-    assert(@parser.parse('A={}'))
+    assert_equal([],@parser.parse('A={}').elements[5].value)
     assert(@parser.parse('A = { }'))
     assert(@parser.parse('Rel={(1,2)}'))
     assert(@parser.parse('A={(1,2),(1,2)}'))
