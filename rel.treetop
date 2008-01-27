@@ -1,0 +1,59 @@
+grammar Rel
+
+	rule command
+  		affectation / calcul / couple
+  	end
+
+	rule affectation
+		symbol s '=' s set {
+  			def action
+  				'a_affectation'
+  			end
+  		}
+	end
+
+	rule symbol
+		[A-Z] [a-z]*
+	end
+	
+	rule set
+		'{' s couples s '}' {
+			def value
+				Relation.new
+			end
+		}
+	end
+
+	rule couples
+		couples_b / couple?
+	end
+	
+	rule couples_b
+		couple ',' couples_b / couple
+ 	end
+
+	rule couple
+		'(' s number s ',' s number s ')'
+	end
+	
+	rule number
+		'0' / [1-9] [0-9]*
+	end
+
+	rule calcul
+		display
+	end
+
+	rule display
+		symbol {
+  			def action
+  				'a_display'
+  			end
+  		}
+	end
+
+	rule s
+		' '*
+	end
+	
+end
