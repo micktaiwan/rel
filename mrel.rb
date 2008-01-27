@@ -23,15 +23,14 @@ class MRel
   
   def a_display
     s = @symbols[@node.text_value]
-    return 'Symbol not found' if !s
-    s.to_s
+    ['display',s]
   end
   
   def a_affectation
     s   = @node.elements[0].text_value
-    rel = @node.elements[2].value
+    rel = @node.elements[4].value
     @symbols[s] = rel
-    @node.input
+    ['affectation',[s,rel]]
   end
   
   def inspect
