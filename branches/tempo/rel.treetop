@@ -11,7 +11,15 @@ grammar Rel
 	end
 
 	rule command
-  		affectation / calcul
+  		affectation / calcul / list_symbols
+  	end
+  	
+  	rule list_symbols
+  		'sym' {
+  			def action
+  				'a_list_symbols'
+  			end
+  			}
   	end
 
 	rule affectation
