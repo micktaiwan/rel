@@ -56,6 +56,10 @@ class MRel
     rv
   end
   
+  def a_list_symbols
+    ['list_symbols',@symbols]  
+  end
+  
   def inspect
     if @node.terminal?
       puts 'terminal ' + @node.text_value
