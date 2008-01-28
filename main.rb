@@ -1,9 +1,14 @@
 #require '../MLib/TextPrompt'
-require 'rel'
+require 'mrel'
 
 HELP =<<END
 Algebraic Relation Calculator
-Try "A={(1,2)}" and "A"
+q:   quit
+Symbols begin with capital letters, and then downcase (A, Test, Myrelation)
+Affection:
+  A={(1,2)}
+Display a symbol value
+  A
 END
 
 class App #< TextPrompt
@@ -25,10 +30,28 @@ class App #< TextPrompt
         puts HELP
         when ''
       else
-        puts @rel.exec(c)
+        d(@rel.exec(c))
       end # case
     end # while
   end # start
+  
+  def d(arr)
+    result = arr[1] 
+    case arr[0]
+      when 'error'
+      puts "Error: #{result}"
+      when 'symbol'
+      if result[1] == nil
+        puts 'Symbol not found'
+        return
+      end
+      puts result[1].to_s
+      when 'affectation'
+      puts result[1].to_s
+    else
+      puts "Unknown return: #{arr[0]}"
+    end
+  end
   
 end # class App
 
