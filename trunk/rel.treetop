@@ -1,11 +1,17 @@
 grammar Rel
 
+	rule commands
+		command ';' commands
+		/
+		command
+	end
+
 	rule command
-  		affectation / calcul / couple
+  		affectation / calcul
   	end
 
 	rule affectation
-		symbol s '=' s set {
+		symbol s '=' s calcul {
   			def action
   				'a_affectation'
   			end
@@ -13,44 +19,58 @@ grammar Rel
 	end
 
 	rule symbol
-		[A-Z] [a-z]*
+		[A-Z] [a-z]* {
+			def action
+				'a_symbol'
+			end
+		}
 	end
 	
 	rule set
+		'{' s '}' {def value;[];end}
+		/
 		'{' s couples s '}' {
 			def value
-				Relation.new
+				couples.value.uniq
 			end
 		}
 	end
 
 	rule couples
-		couples_b / couple?
+		couple ',' couples {
+			def value
+				couple.value + couples.value
+			end
+		}
+		/
+		couple
 	end
-	
-	rule couples_b
-		couple ',' couples_b / couple
- 	end
 
 	rule couple
-		'(' s number s ',' s number s ')'
+		'(' s n1:number s ',' s n2:number s ')' {
+			def value
+				[[n1.value,n2.value]]
+			end
+		}
 	end
 	
 	rule number
-		'0' / [1-9] [0-9]*
+		'0' / [1-9] [0-9]* {
+			def value
+				text_value.to_i
+			end
+		}			
 	end
 
 	rule calcul
-		display
+		set / symbol #/ inter 
 	end
 
-	rule display
-		symbol {
-  			def action
-  				'a_display'
-  			end
-  		}
-	end
+	#rule inter
+	#	union '/' calcul 
+	#end
+	
+	#A + B / C
 
 	rule s
 		' '*
