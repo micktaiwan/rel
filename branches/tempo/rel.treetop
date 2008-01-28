@@ -1,9 +1,13 @@
 grammar Rel
 
 	rule commands
-		command ';' commands
-		/
-		command
+		command ';' commands {
+			def action
+				'a_commands'
+			end
+			}
+		/ 
+		command 
 	end
 
 	rule command
@@ -22,6 +26,9 @@ grammar Rel
 		[A-Z] [a-z]* {
 			def action
 				'a_symbol'
+			end
+			
+			def value
 			end
 		}
 	end
@@ -63,15 +70,48 @@ grammar Rel
 	end
 
 	rule calcul
-		set / symbol #/ inter 
+		union  {
+			def action
+				'a_calcul'
+			end
+		}
 	end
 
-	#rule inter
-	#	union '/' calcul 
-	#end
+	rule union
+		inter s union_op s union {
+			def value
+				inter.value union_op.text_value union.value
+			end
+			}
+		/ inter
+	end
 	
-	#A + B / C
+	rule union_op
+		'+' / '-'
+	end
+	
+	rule inter
+		elementary s inter_op s inter {
+			def value
+				elementary.value & inter.value
+			end
+			}
+			
+		 / elementary
+	end
 
+	rule inter_op
+		'&'
+	end
+		
+	rule elementary
+		set / symbol / parenthesize
+	end
+	
+	rule parenthesize
+		'(' s union s ')'
+	end
+	
 	rule s
 		' '*
 	end

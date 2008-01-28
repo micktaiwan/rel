@@ -1,14 +1,10 @@
-class Relation
-  
-  def initialize(arr=[])
-    @value = arr
-  end
-  
+# considers a Array as a relation
+class Array
   def to_s
-    if @value == []
+    if self == []
       '{}'
     else
-      "{%s}" % @value.map {|couple| "(#{couple[0]},#{couple[1]})"}.join(', ')
+      "{%s}" % self.map {|couple| "(#{couple[0]},#{couple[1]})"}.join(', ')
     end
   end
 end
