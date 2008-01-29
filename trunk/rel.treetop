@@ -1,9 +1,13 @@
 grammar Rel
 
 	rule commands
-		command ';' commands
-		/
-		command
+		command ';' commands {
+			def action
+				'a_commands'
+			end
+			}
+		/ 
+		command 
 	end
 
 	rule command
@@ -35,7 +39,6 @@ grammar Rel
 			def value
 				get_symbol(text_value.to_s)
 			end
-
 		}
 	end
 	
@@ -76,7 +79,11 @@ grammar Rel
 	end
 
 	rule calcul
-		set / symbol #/ inter 
+		union  {
+			def action
+				'a_calcul'
+			end
+		}
 	end
 
 #	rule union
@@ -103,7 +110,7 @@ grammar Rel
 			end
 			}
 	end
-
+	
 	rule union_b
 		inter s '-' s union {
 			def value
@@ -123,7 +130,18 @@ grammar Rel
 		 / elementary
 	end
 
-
+	rule inter_op
+		'&'
+	end
+		
+	rule elementary
+		set / symbol / parenthesize
+	end
+	
+	rule parenthesize
+		'(' s union s ')'
+	end
+	
 	rule s
 		' '*
 	end

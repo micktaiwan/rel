@@ -48,6 +48,8 @@ class App #< TextPrompt
       puts result.to_s
       when 'affectation'
       puts result[1].to_s
+      when 'calcul'
+      puts result.to_s
       when 'list_symbols'
       result.each {|s,rel| puts "#{s}: #{rel.to_s}"}
     else
