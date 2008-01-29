@@ -2,7 +2,7 @@ require 'rubygems'
 require 'treetop'
 require 'common'
 
-@@symbols = Hash.new(nil)
+@@symbols = Hash.new([]) # [] solves A+B when they are not defined
 
 def get_symbol(s)
   @@symbols[s]
@@ -40,9 +40,9 @@ class MRel
   
   protected
   
-  def a_symbol
-    ['symbol',[@node.text_value,@@symbols[@node.text_value]]]
-  end
+#  def a_symbol
+#    ['symbol',[@node.text_value,@@symbols[@node.text_value]]]
+#  end
   
   def a_affectation
     s   = @node.elements[0].text_value
@@ -53,10 +53,10 @@ class MRel
   
   def a_calcul
     v = @node.value
-    if v == nil # symbol ?
-      v = @@symbols[@node.text_value]
-      return ['symbol',[@node.text_value,v]]
-    end
+#    if v == nil # symbol ?
+#      v = @@symbols[@node.text_value]
+#      return ['symbol',[@node.text_value,v]]
+#    end
     ['calcul',v]
   end
   

@@ -32,9 +32,9 @@ grammar Rel
 
 	rule symbol
 		[A-Z] [a-z]* {
-			def action
-				'a_symbol'
-			end
+#			def action
+#				'a_symbol'
+#			end
 			
 			def value
 				get_symbol(text_value.to_s)
