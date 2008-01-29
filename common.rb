@@ -1,10 +1,13 @@
 # considers a Array as a relation
 class Array
   def to_s
-    if self == []
+    case self
+      when []
       '{}'
+      when nil
+      'nil'
     else
-      "{%s}" % self.map {|couple| "(#{couple[0]},#{couple[1]})"}.join(', ')
+      return "{#{self.map {|couple| !couple ? 'nil':"(#{couple[0]},#{couple[1]})"}.join(', ')}}" 
     end
   end
 end
