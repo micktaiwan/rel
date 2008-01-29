@@ -18,8 +18,7 @@ class App #< TextPrompt
   end
   
   def start
-    puts 'Rel 0.0.1 (This is really still just a test)'
-    puts '"h" helps'
+    puts 'Rel V0.1 - "h" helps'
     while true
       print '>'
       c = gets.chomp
@@ -35,6 +34,7 @@ class App #< TextPrompt
     end # while
   end # start
   
+  # display results
   def d(arr)
     result = arr[1] 
     case arr[0]
