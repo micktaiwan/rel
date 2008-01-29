@@ -1,7 +1,7 @@
 grammar Rel
 
 	rule commands
-		command ';' commands {
+		s command s ';' s commands s {
 			def action
 				'a_commands'
 			end
@@ -106,7 +106,7 @@ grammar Rel
 	rule union_a
 		inter s '+' s union {
 			def value
-				inter.value + union.value
+				(inter.value + union.value).uniq
 			end
 			}
 	end
@@ -114,7 +114,7 @@ grammar Rel
 	rule union_b
 		inter s '-' s union {
 			def value
-				inter.value - union.value
+				(inter.value - union.value)
 			end
 			}
 	end

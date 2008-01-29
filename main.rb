@@ -2,13 +2,19 @@
 require 'mrel'
 
 HELP =<<END
+=============================
 Algebraic Relation Calculator
 q:   quit
 Symbols begin with capital letters, and then downcase (A, Test, Myrelation)
 Affection:
   A={(1,2)}
+  B={(1,2),(2,3)}
 Display a symbol value
   A
+Union, Difference, Intersection
+  A + B
+  B - A
+  A & B
 END
 
 class App #< TextPrompt
