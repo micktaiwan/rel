@@ -1,3 +1,6 @@
+# DONE: A+B : if A or B is not defined => crashes
+# TODO: last = last result
+
 #require '../MLib/TextPrompt'
 require 'mrel'
 
@@ -32,22 +35,25 @@ class App #< TextPrompt
     end
   end
   
-  
   # display results
   def d(arr)
     result = arr[1] 
     case arr[0]
       when 'error'
       puts "Error: #{result}"
-      when 'symbol'
-      if result[1] == nil
-        puts 'Symbol not found'
-        return
-      end
-      puts result[1].to_s
+      #      when 'symbol'
+      #      if result == nil
+      #        puts 'Symbol not found'
+      #        return
+      #      end
+      #      puts result.to_s
       when 'affectation'
       puts "#{result[0]}=#{result[1].to_s}"
       when 'calcul'
+      if result == nil # TODO: pourrait etre autre chose qu'un symbole....
+        puts 'Symbol not found'
+        return
+      end
       puts result.to_s
       when 'list_symbols'
       result.each {|s,rel| puts "#{s}: #{rel.to_s}"}

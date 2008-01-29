@@ -41,11 +41,11 @@ class TC_REL < Test::Unit::TestCase
   end
   
   def test_affect
-    assert_equal(['symbol',nil],@rel.exec('A'))
-    assert_equal(['symbol',[]],@rel.exec('A={};A'))
-    assert_equal(['symbol',[[1,2]]],@rel.exec('A={(1,2)};A'))
-    assert_not_equal(['symbol',nil],@rel.exec('A'))
-    assert_equal(['symbol',[]],@rel.exec('A={};B=A;B'))
+    assert_equal(['calcul',nil],@rel.exec('A'))
+    assert_equal(['calcul',[]],@rel.exec('A={};A'))
+    assert_equal(['calcul',[[1,2]]],@rel.exec('A={(1,2)};A'))
+    assert_not_equal(['calcul',nil],@rel.exec('A'))
+    assert_equal(['calcul',[]],@rel.exec('A={};B=A;B'))
     #assert_equal([[1,2]],@parser.parse('A={(1,2)}').elements[0].value)
     #assert_equal([[1,2],[2,3]],@parser.parse('A={(1,2),(2,3)}').elements[0].value)
   end
