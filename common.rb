@@ -1,3 +1,4 @@
+# considers a Array as a relation
 class Array
   def to_s
     if self == []
