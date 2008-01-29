@@ -7,7 +7,15 @@ grammar Rel
 	end
 
 	rule command
-  		affectation / calcul
+  		affectation / calcul / list_symbols
+  	end
+  	
+  	rule list_symbols
+  		'sym' {
+  			def action
+  				'a_list_symbols'
+  			end
+  			}
   	end
 
 	rule affectation
@@ -23,6 +31,11 @@ grammar Rel
 			def action
 				'a_symbol'
 			end
+			
+			def value
+				get_symbol(text_value.to_s)
+			end
+
 		}
 	end
 	
@@ -66,11 +79,50 @@ grammar Rel
 		set / symbol #/ inter 
 	end
 
-	#rule inter
-	#	union '/' calcul 
-	#end
+#	rule union
+#		inter s union_op s union {
+#			def value
+#				inter.value union_op.text_value union.value
+#			end
+#			}
+#		/ inter
+#	end
+#	
+#	rule union_op
+#		'+' / '-'
+#	end
+
+	rule union
+		union_a / union_b / inter
+	end
 	
-	#A + B / C
+	rule union_a
+		inter s '+' s union {
+			def value
+				inter.value + union.value
+			end
+			}
+	end
+
+	rule union_b
+		inter s '-' s union {
+			def value
+				inter.value - union.value
+			end
+			}
+	end
+	
+	
+	rule inter
+		elementary s inter_op s inter {
+			def value
+				elementary.value & inter.value
+			end
+			}
+			
+		 / elementary
+	end
+
 
 	rule s
 		' '*
