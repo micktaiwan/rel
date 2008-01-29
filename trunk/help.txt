@@ -1,0 +1,32 @@
+=== Help ===
+
+This is Rel's help file.
+Press 'space' for next page, 'enter' for next line, 'q' to quit help.
+
+=== Commands ===
+
+  q   : Quit Rel
+  sym : Display all symbols
+
+=== General ===
+
+Rel is a algebraic relation calculator
+
+
+=== Calculs ===
+
+Affection:
+  A={(1,2)}
+  B={(1,2),(2,3)}
+  
+  Symbols must begin with capital letters, and then downcase letters
+  Ex: A, Test, Myrelation
+    
+Display a symbol value
+  A
+Union, Difference, Intersection
+  A + B
+  B - A
+  A & B
+
+End of help file
