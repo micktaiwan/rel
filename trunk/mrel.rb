@@ -55,7 +55,7 @@ class MRel
     v = @node.value
     if v == nil # symbol ?
       v = @@symbols[@node.text_value]
-      return ['symbol',v]
+      return ['symbol',[@node.text_value,v]]
     end
     ['calcul',v]
   end
