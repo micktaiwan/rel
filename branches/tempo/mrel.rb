@@ -2,12 +2,22 @@ require 'rubygems'
 require 'treetop'
 require 'common'
 
+@@symbols = Hash.new(nil)
+
+def get_symbol(s)
+  @@symbols[s]
+end
+
+def set_symbol(s,v)
+  @@symbols[s] = v
+end
+
+
 class MRel
   
   def initialize
     Treetop.load "rel"
     @parser = RelParser.new
-    @symbols = {}
     #puts @parser.root
   end
   
@@ -31,20 +41,20 @@ class MRel
   protected
   
   def a_symbol
-    ['symbol',[@node.text_value,@symbols[@node.text_value]]]
+    ['symbol',[@node.text_value,@@symbols[@node.text_value]]]
   end
   
   def a_affectation
     s   = @node.elements[0].text_value
     rel = @node.elements[4].value
-    @symbols[s] = rel
+    @@symbols[s] = rel
     ['affectation',[s,rel]]
   end
   
   def a_calcul
     v = @node.value
     if v == nil # symbol ?
-      v = @symbols[@node.text_value]
+      v = @@symbols[@node.text_value]
       return ['symbol',v]
     end
     ['calcul',v]
@@ -62,7 +72,7 @@ class MRel
   end
   
   def a_list_symbols
-    ['list_symbols',@symbols]  
+    ['list_symbols',@@symbols]  
   end
   
   def inspect

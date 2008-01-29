@@ -37,7 +37,7 @@ grammar Rel
 			end
 			
 			def value
-				nil
+				get_symbol(text_value.to_s)
 			end
 		}
 	end
@@ -86,18 +86,39 @@ grammar Rel
 		}
 	end
 
+#	rule union
+#		inter s union_op s union {
+#			def value
+#				inter.value union_op.text_value union.value
+#			end
+#			}
+#		/ inter
+#	end
+#	
+#	rule union_op
+#		'+' / '-'
+#	end
+
 	rule union
-		inter s union_op s union {
-			def value
-				inter.value union_op.text_value union.value
-			end
-			}
-		/ inter
+		union_a / union_b / inter
 	end
 	
-	rule union_op
-		'+' / '-'
+	rule union_a
+		inter s '+' s union {
+			def value
+				inter.value + union.value
+			end
+			}
 	end
+	
+	rule union_b
+		inter s '-' s union {
+			def value
+				inter.value - union.value
+			end
+			}
+	end
+	
 	
 	rule inter
 		elementary s inter_op s inter {
