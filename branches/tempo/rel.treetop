@@ -37,6 +37,7 @@ grammar Rel
 			end
 			
 			def value
+				nil
 			end
 		}
 	end

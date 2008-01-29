@@ -22,11 +22,11 @@ class MRel
   end
   
   # flatten relations
-  def exec_flat(text)
-    rv = exec(text)
-    rv[1]= rv[1].map {|e| e.respond_to?('value') ? e.value : e.to_s}
-    rv
-  end
+  #def exec_flat(text)
+#    rv = exec(text)
+#    rv[1]= rv[1].map {|e| e.respond_to?('value') ? e.value : e.to_s} if rv[1]
+#    rv
+#  end
   
   protected
   
@@ -42,7 +42,12 @@ class MRel
   end
   
   def a_calcul
-    ['calcul',@node.value]
+    v = @node.value
+    if v == nil # symbol ?
+      v = @symbols[@node.text_value]
+      return ['symbol',v]
+    end
+    ['calcul',v]
   end
   
   def a_commands # FIXME: too complicated.....

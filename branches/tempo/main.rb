@@ -41,11 +41,11 @@ class App #< TextPrompt
       when 'error'
       puts "Error: #{result}"
       when 'symbol'
-      if result[1] == nil
+      if result == nil
         puts 'Symbol not found'
         return
       end
-      puts result[1].to_s
+      puts result.to_s
       when 'affectation'
       puts result[1].to_s
       when 'calcul'
